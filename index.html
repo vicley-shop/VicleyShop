@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lácteos Vicley – Productos de Calidad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:   #2254b0;
+      --blue2:  #1a3e8c;
+      --green:  #2da63c;
+      --green2: #1e8028;
+      --cream:  #faf8f3;
+      --white:  #ffffff;
+      --dark:   #1a1a1a;
+      --gray:   #666;
+      --lgray:  #f0ede6;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Nunito',sans-serif; background:var(--white); color:var(--dark); overflow-x:hidden; }
+    img { max-width:100%; display:block; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:8px 5%;
+      background:rgba(255,255,255,0.97);
+      backdrop-filter:blur(8px);
+      box-shadow:0 2px 20px rgba(0,0,0,0.08);
+    }
+    .nav-logo { height:58px; width:auto; }
+    nav ul { list-style:none; display:flex; gap:30px; }
+    nav a { text-decoration:none; color:var(--dark); font-size:0.87rem; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; transition:color .2s; }
+    nav a:hover { color:var(--blue); }
+    .nav-cta { background:var(--green); color:var(--white)!important; padding:10px 22px; border-radius:25px; transition:background .2s,transform .2s!important; }
+    .nav-cta:hover { background:var(--green2)!important; transform:translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero { min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden; padding-top:80px; }
+    .hero-bg { position:absolute; inset:0; background-image:url('images/equipo-01.jpg'); background-size:cover; background-position:center top; filter:brightness(.42); }
+    .hero-overlay { position:absolute; inset:0; background:linear-gradient(120deg, rgba(26,62,140,.7) 0%, rgba(0,0,0,.2) 100%); }
+    .hero-content { position:relative; z-index:2; padding:60px 8%; max-width:720px; }
+    .hero-badge { display:inline-block; background:var(--green); color:var(--white); font-size:.75rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 18px; border-radius:20px; margin-bottom:24px; animation:fadeUp .7s ease both; }
+    .hero h1 { font-family:'Merriweather',serif; font-size:clamp(2.8rem,6vw,5rem); font-weight:900; color:var(--white); line-height:1.15; margin-bottom:18px; animation:fadeUp .7s ease .1s both; }
+    .hero h1 span { color:#7dd88a; }
+    .hero p { font-size:1.08rem; color:rgba(255,255,255,.85); line-height:1.85; margin-bottom:40px; animation:fadeUp .7s ease .2s both; }
+    .hero-btns { display:flex; gap:16px; flex-wrap:wrap; animation:fadeUp .7s ease .3s both; }
+    .btn-primary { background:var(--blue); color:var(--white); padding:16px 36px; border-radius:30px; text-decoration:none; font-weight:700; font-size:.95rem; transition:background .2s,transform .2s; }
+    .btn-primary:hover { background:var(--blue2); transform:translateY(-2px); }
+    .btn-outline { background:transparent; color:var(--white); border:2px solid rgba(255,255,255,.65); padding:14px 32px; border-radius:30px; text-decoration:none; font-weight:700; font-size:.95rem; transition:all .2s; }
+    .btn-outline:hover { background:rgba(255,255,255,.15); border-color:white; }
+
+    /* ── STATS BAR ── */
+    .stats { background:var(--blue2); padding:44px 5%; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; text-align:center; }
+    .stat-num { font-family:'Merriweather',serif; font-size:2.6rem; font-weight:900; color:#7dd88a; }
+    .stat-label { font-size:.82rem; color:rgba(255,255,255,.72); margin-top:4px; }
+
+    /* ── SECTION COMMONS ── */
+    section { padding:90px 5%; }
+    .sec-label { font-size:.7rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--green); margin-bottom:10px; }
+    .sec-title { font-family:'Merriweather',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700; color:var(--blue2); margin-bottom:14px; }
+    .sec-sub { font-size:1rem; color:var(--gray); max-width:600px; line-height:1.8; }
+    .sec-head { margin-bottom:56px; }
+    .sec-head.center { text-align:center; }
+    .sec-head.center .sec-sub { margin:0 auto; }
+
+    /* ── NOSOTROS ── */
+    #nosotros { background:var(--cream); }
+    .nos-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .nos-imgs { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .nos-imgs img { border-radius:12px; object-fit:cover; height:220px; width:100%; }
+    .nos-imgs img:first-child { grid-column:1/-1; height:280px; }
+    .nos-list { list-style:none; margin-top:24px; }
+    .nos-list li { display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px solid rgba(0,0,0,.06); font-size:.93rem; line-height:1.65; }
+    .nos-list .ico { font-size:1.3rem; flex-shrink:0; margin-top:2px; }
+
+    /* ── PRODUCTOS ── */
+    #productos { background:var(--white); }
+    .prod-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:28px; }
+    .prod-card { border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.08); transition:transform .3s,box-shadow .3s; background:var(--white); }
+    .prod-card:hover { transform:translateY(-6px); box-shadow:0 14px 40px rgba(34,84,176,.15); }
+    .prod-card img { width:100%; height:260px; object-fit:cover; object-position:center; }
+    .prod-info { padding:20px 22px 26px; }
+    .prod-tag { display:inline-block; background:#e8f0fe; color:var(--blue); font-size:.68rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:4px 12px; border-radius:10px; margin-bottom:8px; }
+    .prod-info h3 { font-family:'Merriweather',serif; font-size:1.08rem; color:var(--dark); margin-bottom:6px; }
+    .prod-info p { font-size:.87rem; color:var(--gray); line-height:1.65; }
+
+    /* ── PROCESO ── */
+    #proceso { background:var(--lgray); }
+    .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:28px; }
+    .paso { background:var(--white); border-radius:14px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,.07); }
+    .paso img { width:100%; height:200px; object-fit:cover; }
+    .paso-body { padding:18px 20px 22px; }
+    .paso-num { font-family:'Merriweather',serif; font-size:1.5rem; font-weight:900; color:var(--blue); opacity:.18; margin-bottom:6px; }
+    .paso-body h3 { font-size:1rem; font-weight:700; margin-bottom:6px; color:var(--blue2); }
+    .paso-body p { font-size:.84rem; color:var(--gray); line-height:1.65; }
+
+    /* ── GALERÍA ── */
+    #galeria { background:var(--white); }
+    .gal-grid { columns:3; column-gap:14px; }
+    .gal-grid img { width:100%; margin-bottom:14px; border-radius:10px; object-fit:cover; break-inside:avoid; transition:opacity .3s,transform .3s; cursor:pointer; }
+    .gal-grid img:hover { opacity:.86; transform:scale(1.015); }
+
+    /* lightbox */
+    #lb { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.92); align-items:center; justify-content:center; }
+    #lb.on { display:flex; }
+    #lb img { max-width:92vw; max-height:90vh; border-radius:8px; }
+    #lb-x { position:absolute; top:20px; right:28px; color:white; font-size:2.5rem; cursor:pointer; background:none; border:none; line-height:1; }
+
+    /* ── VIDEOS ── */
+    #videos { background:var(--lgray); }
+    .vid-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:28px; }
+    .vid-card { background:var(--white); border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.08); }
+    .vid-card video { width:100%; aspect-ratio:9/16; object-fit:cover; display:block; background:#000; max-height:400px; }
+    .vid-card .vid-info { padding:18px 22px 22px; }
+    .vid-card .vid-info h3 { font-family:'Merriweather',serif; font-size:1rem; color:var(--blue2); margin-bottom:5px; }
+    .vid-card .vid-info p { font-size:.85rem; color:var(--gray); line-height:1.6; }
+
+    /* ── CONTACTO ── */
+    #contacto { background:var(--blue2); text-align:center; padding:100px 5%; }
+    #contacto .sec-label { color:#7dd88a; }
+    #contacto .sec-title { color:var(--white); }
+    #contacto .sec-sub { color:rgba(255,255,255,.75); margin:0 auto 48px; }
+    .cta-cards { display:flex; justify-content:center; flex-wrap:wrap; gap:20px; }
+    .cta-card { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:16px; padding:30px 34px; text-decoration:none; color:white; min-width:180px; transition:background .3s,transform .2s; }
+    .cta-card:hover { background:rgba(255,255,255,.22); transform:translateY(-4px); }
+    .cta-card .ico { font-size:2rem; margin-bottom:10px; }
+    .cta-card .lbl { font-size:.7rem; letter-spacing:2px; text-transform:uppercase; opacity:.7; margin-bottom:4px; }
+    .cta-card .val { font-weight:700; font-size:1rem; }
+
+    /* ── FOOTER ── */
+    footer { background:#0f2356; padding:30px 5%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+    footer img { height:48px; filter:brightness(0) invert(1); opacity:.75; }
+    footer p { color:rgba(255,255,255,.4); font-size:.8rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px){
+      nav ul{display:none;}
+      .nos-grid{grid-template-columns:1fr;}
+      .nos-imgs img:first-child{height:200px;}
+      .gal-grid{columns:2;}
+    }
+    @media(max-width:480px){
+      .gal-grid{columns:1;}
+      .hero h1{font-size:2.2rem;}
+      .hero-content{padding:40px 6%;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#"><img src="logo.png" class="nav-logo" alt="Lácteos Vicley"/></a>
+  <ul>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#contacto" class="nav-cta">Pedidos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🐄 Artesanal · Fresco · De Calidad</div>
+    <h1>Lácteos<br><span>Vicley</span></h1>
+    <p>Del campo a tu mesa. Quesos artesanales elaborados con leche fresca, tradición familiar y amor por lo que hacemos.</p>
+    <div class="hero-btns">
+      <a href="#productos" class="btn-primary">Ver productos</a>
+      <a href="#contacto" class="btn-outline">Hacer un pedido</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div><div class="stat-num">100%</div><div class="stat-label">Leche fresca</div></div>
+  <div><div class="stat-num">+8</div><div class="stat-label">Variedades de queso</div></div>
+  <div><div class="stat-num">0</div><div class="stat-label">Azúcar añadida</div></div>
+  <div><div class="stat-num">✓</div><div class="stat-label">Calidad garantizada</div></div>
+</div>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="nos-grid">
+    <div class="nos-imgs">
+      <img src="images/equipo-03.jpg" alt="Equipo Vicley en la tienda" loading="lazy"/>
+      <img src="images/equipo-05.jpg" alt="Equipo Vicley" loading="lazy"/>
+      <img src="images/proceso-07.jpg" alt="Elaboración artesanal de queso hilado" loading="lazy"/>
+    </div>
+    <div>
+      <p class="sec-label">✦ Quiénes somos</p>
+      <h2 class="sec-title">Una familia apasionada por los lácteos</h2>
+      <p class="sec-sub">En Lácteos Vicley elaboramos nuestros productos con leche fresca de alta calidad, siguiendo procesos artesanales que garantizan el mejor sabor y frescura en cada pieza.</p>
+      <ul class="nos-list">
+        <li><span class="ico">🧀</span><span><strong>Quesos hilados artesanales</strong> — elaborados a mano con técnicas tradicionales y leche fresca seleccionada.</span></li>
+        <li><span class="ico">🌿</span><span><strong>Ingredientes 100% naturales</strong> — sin azúcar añadida, con opciones en sal y grasa para tu preferencia.</span></li>
+        <li><span class="ico">🚚</span><span><strong>Pedidos y envíos</strong> — atendemos pedidos directos con entrega fresca y a domicilio.</span></li>
+        <li><span class="ico">⭐</span><span><strong>Calidad en cada producto</strong> — cada pieza pasa por control de calidad antes de llegar a tus manos.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="sec-head center">
+    <p class="sec-label">✦ Catálogo</p>
+    <h2 class="sec-title">Nuestros Productos</h2>
+    <p class="sec-sub">Quesos artesanales elaborados con los mejores ingredientes para ofrecerte el auténtico sabor lácteo.</p>
+  </div>
+  <div class="prod-grid">
+
+    <div class="prod-card">
+      <img src="images/producto-rikota-01.jpg" alt="Rikota Vicley 500g" loading="lazy"/>
+      <div class="prod-info">
+        <span class="prod-tag">Fresco</span>
+        <h3>Rikota Vicley</h3>
+        <p>Suave y cremosa. Presentación 500g. Medio en grasa, medio en sal, sin azúcar. Perfecta para ensaladas y postres.</p>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <img src="images/producto-telita-nevera.jpg" alt="Queso Telita Arepero" loading="lazy"/>
+      <div class="prod-info">
+        <span class="prod-tag">Queso Hilado</span>
+        <h3>Queso Telita "Arepero"</h3>
+        <p>El acompañante perfecto de tus arepas. Textura suave y sabor tradicional que encanta a toda la familia.</p>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <img src="images/producto-hilado.jpg" alt="Queso Hilado Artesanal" loading="lazy"/>
+      <div class="prod-info">
+        <span class="prod-tag">Artesanal</span>
+        <h3>Queso Hilado</h3>
+        <p>Elaborado a mano con la técnica tradicional de hilado. Textura única, sabor inconfundible en cada bocado.</p>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <img src="images/producto-rikota-04.jpg" alt="Queso Mozzarella Guayas" loading="lazy"/>
+      <div class="prod-info">
+        <span class="prod-tag">Mozzarella</span>
+        <h3>Queso Mozzarella "Guayas"</h3>
+        <p>Queso tipo mozzarella de estilo local. Funde perfectamente. Ideal para pizza, lasaña y platos calientes.</p>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <img src="images/producto-rikota-02.jpg" alt="Queso con Relleno Dulce" loading="lazy"/>
+      <div class="prod-info">
+        <span class="prod-tag">Con Relleno</span>
+        <h3>Queso con Relleno Dulce</h3>
+        <p>Queso artesanal relleno de dulce. Una experiencia única que combina lo salado con un toque especial.</p>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <img src="images/producto-rikota-03.jpg" alt="Queso con Especias" loading="lazy"/>
+      <div class="prod-info">
+        <span class="prod-tag">Con Especias</span>
+        <h3>Queso con Especias</h3>
+        <p>Con orégano, ají, albahaca y más. Para quienes buscan un sabor diferente y aromático en su queso diario.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="sec-head center">
+    <p class="sec-label">✦ Artesanal</p>
+    <h2 class="sec-title">Nuestro Proceso de Elaboración</h2>
+    <p class="sec-sub">Cada queso es el resultado de un proceso cuidadoso que garantiza la calidad y frescura que nos caracteriza.</p>
+  </div>
+  <div class="steps">
+    <div class="paso">
+      <img src="images/proceso-01.jpg" alt="Leche fresca" loading="lazy"/>
+      <div class="paso-body">
+        <div class="paso-num">01</div>
+        <h3>Leche fresca seleccionada</h3>
+        <p>Comenzamos con leche fresca de alta calidad, seleccionada para garantizar el mejor producto final.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <img src="images/proceso-07.jpg" alt="Hilado artesanal" loading="lazy"/>
+      <div class="paso-body">
+        <div class="paso-num">02</div>
+        <h3>Hilado artesanal</h3>
+        <p>Nuestro maestro quesero realiza el hilado a mano, dando al queso su textura elástica y sabor característico.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <img src="images/proceso-17.jpg" alt="Moldeado y corte" loading="lazy"/>
+      <div class="paso-body">
+        <div class="paso-num">03</div>
+        <h3>Moldeado y corte</h3>
+        <p>El queso se moldea y corta en porciones perfectas, listo para ser empacado fresco.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <img src="images/proceso-11.jpg" alt="Control de calidad" loading="lazy"/>
+      <div class="paso-body">
+        <div class="paso-num">04</div>
+        <h3>Control de calidad</h3>
+        <p>Cada producto pasa por rigurosos controles antes de llegar a tus manos, asegurando siempre lo mejor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="sec-head center">
+    <p class="sec-label">✦ Fotos</p>
+    <h2 class="sec-title">Galería</h2>
+    <p class="sec-sub">Toca cualquier foto para verla en grande. Un vistazo a nuestros productos, proceso y equipo.</p>
+  </div>
+  <div class="gal-grid">
+    <img src="images/equipo-01.jpg"         alt="Equipo Vicley en la tienda" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/producto-rikota-01.jpg" alt="Rikota Vicley" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/proceso-07.jpg"         alt="Proceso hilado" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/equipo-03.jpg"          alt="Stand Vicley" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/producto-rikota-04.jpg" alt="Mozzarella Guayas" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/proceso-17.jpg"         alt="Queso moldeado" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/producto-rikota-02.jpg" alt="Queso relleno" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/equipo-05.jpg"          alt="Equipo Vicley" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/proceso-11.jpg"         alt="Control de calidad" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/producto-telita-nevera.jpg" alt="Queso Telita en nevera" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/producto-05.jpg"        alt="Equipo con productos" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/proceso-01.jpg"         alt="Leche fresca" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/producto-hilado.jpg"    alt="Queso hilado" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/producto-rikota-03.jpg" alt="Rikota fresca" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/equipo-02.jpg"          alt="Equipo Vicley" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/proceso-12.jpg"         alt="Proceso elaboración" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/producto-09.jpg"        alt="Productos Vicley" loading="lazy" onclick="lb(this.src)"/>
+    <img src="images/proceso-05.jpg"         alt="Proceso hilado 2" loading="lazy" onclick="lb(this.src)"/>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button id="lb-x" onclick="cLb()">✕</button>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="sec-head center">
+    <p class="sec-label">✦ En acción</p>
+    <h2 class="sec-title">Videos de nuestros productos</h2>
+    <p class="sec-sub">Mira de cerca cómo elaboramos y presentamos nuestros quesos artesanales Vicley.</p>
+  </div>
+  <div class="vid-grid">
+    <div class="vid-card">
+      <video src="videos/video-1.mov" controls playsinline preload="metadata"></video>
+      <div class="vid-info">
+        <h3>Queso Hilado Artesanal</h3>
+        <p>El proceso tradicional que le da sabor y textura única a nuestros quesos.</p>
+      </div>
+    </div>
+    <div class="vid-card">
+      <video src="videos/video-2.mov" controls playsinline preload="metadata"></video>
+      <div class="vid-info">
+        <h3>Nuestros Productos</h3>
+        <p>Variedad de quesos frescos y artesanales para todos los gustos.</p>
+      </div>
+    </div>
+    <div class="vid-card">
+      <video src="videos/video-3.mov" controls playsinline preload="metadata"></video>
+      <div class="vid-info">
+        <h3>Calidad y Frescura</h3>
+        <p>Elaborados el mismo día para garantizar la máxima frescura en tu mesa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="sec-head center">
+    <p class="sec-label">✦ Escríbenos</p>
+    <h2 class="sec-title">¿Listo para hacer tu pedido?</h2>
+    <p class="sec-sub">Contáctanos por WhatsApp, Instagram o correo. Atendemos con gusto y realizamos envíos a domicilio.</p>
+  </div>
+  <div class="cta-cards">
+    <a class="cta-card" href="https://wa.me/TUNUMERO" target="_blank">
+      <div class="ico">💬</div>
+      <div class="lbl">WhatsApp</div>
+      <div class="val">Escríbenos ya</div>
+    </a>
+    <a class="cta-card" href="https://instagram.com/TUUSUARIO" target="_blank">
+      <div class="ico">📸</div>
+      <div class="lbl">Instagram</div>
+      <div class="val">@vicley</div>
+    </a>
+    <a class="cta-card" href="https://facebook.com/TUPAGINA" target="_blank">
+      <div class="ico">👍</div>
+      <div class="lbl">Facebook</div>
+      <div class="val">Lácteos Vicley</div>
+    </a>
+    <a class="cta-card" href="mailto:TUCORREO@gmail.com">
+      <div class="ico">✉️</div>
+      <div class="lbl">Correo</div>
+      <div class="val">Envíanos un email</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="logo.png" alt="Lácteos Vicley"/>
+  <p>© 2026 Lácteos Vicley – Productos de Calidad. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  function lb(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('on');document.body.style.overflow='hidden';}
+  function cLb(){document.getElementById('lb').classList.remove('on');document.body.style.overflow='';}
+  document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)cLb();});
+</script>
+</body>
+</html>
